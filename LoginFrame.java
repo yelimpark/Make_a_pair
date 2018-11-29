@@ -63,17 +63,25 @@ public class LoginFrame extends JFrame implements ActionListener
 	
 	public void ActionPeformed (ActionEvent e)
 	{
-		String id = EId.getText();
-		char[] pass = EPassword.getPassword();
-		String password = new String(pass);
-
+		if (e.getActionCommand()== "로그인")
+		{
+			String id = EId.getText();
+			char[] pass = EPassword.getPassword();
+			String password = new String(pass);
+			UserManagement.LoginCheck(arr,2,id,password);
+		}
+		else if (e.getActionCommand()== "회원가입")
+		{
+			String id = EId.getText();
+			char[] pass = EPassword.getPassword();
+			String password = new String(pass);
+		}
 	}
 	
 	public static void main (String[] args)
 	{
-		new LoginFrame();
 		String[][] arr = {{"aaa","1234","12"},{"aaa","1234",""}};
-		UserManagement.LoginCheck(arr,2,id,password);
+		new LoginFrame();
 	}
 
 }
