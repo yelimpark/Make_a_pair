@@ -22,7 +22,7 @@ public class UserManagement
 	
 	
 	
-	public boolean LoginCheck (String[][] userlist, int ulSize, String id, String password)
+	public boolean LoginCheck (String[][3] userlist, int ulSize, String id, String password)
 	{
 		for(int i=0; i<ulSize; i++)
 		{
