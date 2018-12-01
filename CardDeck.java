@@ -13,7 +13,7 @@ public class CardDeck
 		}
 	}
 	
-	public CardDeck()
+	public CardDeck() // carddeck 만들기
 	{
 		createDeck("spade");
 		createDeck("heart");
@@ -21,7 +21,7 @@ public class CardDeck
 		createDeck("club");
 	}
 	
-	public Card newCard()
+	public Card newCard() // card 랜덤으로 뽑기
 	{
 		ArrayList<Integer> index = new ArrayList<Integer>();
 		for(int i=0; i<104; i++)
