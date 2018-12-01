@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 public class CardDeck 
 {
-	public int level;
 	private Card[] deck = new Card[4*Card.suit_size];
 	
 	private void createDeck(String suit) 
