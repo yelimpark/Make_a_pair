@@ -4,17 +4,6 @@ import javax.swing.JOptionPane;
 import java.io.*;
 import java.util.*;
 import project.UserFileReader;
-import project.User;
-
-/* 
- * 1. 회원 리스트 파일 불러오기
- * 2. 로그인프레임에서 입력받은 정보 대조, 일치 불일치 주기
- * 3. 로그인시 현재 유저 정보에 정보 기입
- * 4. 리스트에서 회원 삭제
- * 5. 게임 결과 포인트에 반영
- * 6. 리스트에서 맞는 자리(랭킹)에 끼워넣기
- * 7. 기존 텍스트파일에 새로운 랭킹 끼워넣기
-*/
 
 public class UserList 
 {
@@ -22,14 +11,17 @@ public class UserList
 	private String[] tmpUser;
 	private ArrayList<String[]> userlist;
 	
-	public UserList()
+	public UserList() // 유저리스트객체 생성시 유저파일리더를 이용해 유저리스트에 저장.
 	{
+		String[] readUser = new String[3];	
 		userlist = new ArrayList<String[]>();
-		UserFileReader reader = new UserFileReader();
 		userlist.clear();
+		
+		UserFileReader reader = new UserFileReader();
 		while(reader.getNextRecord()) 
 		{
-			userlist.add(reader.getTmpUser());
+			readUser = reader.getTmpUser();
+ 			userlist.add(new String[]{readUser[0], readUser[1], readUser[2]});
 	    }
 		reader.close();
 	}
@@ -45,10 +37,10 @@ public class UserList
 		{	
 			if (userlist.get(i)[0].equals(id))
 			{
-				if (userlist.get(i)[1].equals(password))
+				if (userlist.get(i)[1].equals(password)) //해당 유저정보와 일치하는 유저정보를 찾았을 때
 				{
 					userNum = i;
-					tmpUser = userlist.get(userNum);
+					tmpUser = userlist.get(userNum); //유저정보를 임시유저에 저장
 					userlist.remove(userNum);
 					JOptionPane.showMessageDialog(null,"로그인 되었습니다.");
 					return true;
@@ -64,7 +56,7 @@ public class UserList
 		return false;
 	}
 	
-	public String[] GetTmpUser()
+	public String[] GetTmpUser() // 찾은 임시유저를 리턴
 	{
 		return tmpUser;
 	}
@@ -83,12 +75,18 @@ public class UserList
 		return true;
 	}
 	
-	public void Updateuserlist(String[] user)
+	public void Updateuserlist(String[] user) // 편의상 유저를 유저객체가 아닌 리스트로 받는것에 주의
 	{
-		boolean added = false;
-		for(int i=0; i<userlist.size(); i++)
+		boolean added = false; //유저가 리스트에 더해졌는가
+		
+		for(int i=0; i<userlist.size(); i++) //유저의 전 정보가 리스트에 존재하면 삭제
 		{
-			System.out.println(userlist.get(i)[i]);
+			if (userlist.get(i)[0].equals(user[0]))
+				userlist.remove(i);
+		}
+		
+		for(int i=0; i<userlist.size(); i++) // 적절한 곳에 유저 끼워넣기
+		{
 			if(Integer.parseInt(user[2]) > Integer.parseInt(userlist.get(i)[2]))
 			{
 				added = true;
@@ -97,10 +95,10 @@ public class UserList
 			}
 		}
 		
-		if (!added)
+		if (!added) //유저가 더해지지 않았으면 맨 끝에 추가 
 			userlist.add(user);
 		
-		try
+		try // 리스트 수정시 자동으로 파일 다시쓰기
 		{
 			UpdateUserFile();
 		}
@@ -108,9 +106,10 @@ public class UserList
 		{
 		    System.out.println("Error in update file : " + e.getMessage());
 		}
+
 	}
 	
-	public void UpdateUserFile() throws IOException
+	public void UpdateUserFile() throws IOException //파일 다시쓰기
 	{
 		PrintWriter outfile = new PrintWriter(new FileWriter("userfile.txt"));
 		for(int i=0;i<userlist.size(); i++)
@@ -121,11 +120,19 @@ public class UserList
 		outfile.close();
 	}
 	
+	public void ShowRanking() // 랭킹 팝업창으로 띄워주기
+	{
+		String ranking = "";
+		
+		for (int i=0; i<userlist.size(); i++)
+		{
+			ranking += "\n" + String.valueOf(i) + "위 | " + userlist.get(i)[0] + " " + userlist.get(i)[2] + "점";
+		}
+		JOptionPane.showMessageDialog(null,"랭킹을 확인하세요." + ranking);
+	}
+	
 	public static void main(String[] args)
 	{
-		/*UserList ul = new UserList();
-		ArrayList<String[]> aa = ul.Getuserlist();
-		System.out.println(aa.get(0)[0]);*/
 	}
 
 }
