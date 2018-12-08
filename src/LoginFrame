@@ -1,4 +1,5 @@
 package project;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -21,7 +22,8 @@ public class LoginFrame extends JFrame
 	private JButton BLogin,BJoin;
 	private JLabel LId,LPassword;
 	private String id,password;
-	public UserList UL;
+	private UserList UL;
+	private User user;
 	
 	public LoginFrame()
 	{
@@ -59,8 +61,9 @@ public class LoginFrame extends JFrame
 		
 		//사건 리스너 객체를 만들고 각각 버튼을 등록
         LoginListener listener = new LoginListener();
+        LoginListener listener2 = new LoginListener();
         BLogin.addActionListener(listener);
-        BJoin.addActionListener(listener);
+        BJoin.addActionListener(listener2);
 		
 	}
 	
@@ -68,15 +71,40 @@ public class LoginFrame extends JFrame
     {
         public void actionPerformed(ActionEvent e)
 		{
-			if (e.getSource() == BLogin)
+			if (e.getSource()== BJoin) // 회원가입 버튼 누를때 
 			{
 				UL = new UserList();
-				
 				id = EId.getText();
 				char[] pass = EPassword.getPassword();
 				password = new String(pass);
 				
-				boolean logincheck = UL.LoginCheck(id,password);
+				boolean idcheck = UL.DuplicationCheck(id); //아이디 중복 확인
+				if (idcheck == false) // 중복시 다시받음
+				{
+					EId.requestFocus();
+					EId.selectAll();
+					EPassword.requestFocus();
+					EPassword.selectAll();
+				}
+				else // 중복아닐때 유저객체 생성 (나중에 게임 끝나고 유저리스트에 추가,정렬함)
+				{
+					user = new User(id,password,0);
+					setVisible(false);
+					LevelFrame Flevel= new LevelFrame();
+					Flevel.user = user;
+					Flevel.setLabelText();
+					Flevel.setVisible(true);
+					dispose();
+				}
+			}
+            else if (e.getSource() == BLogin) // 로그인 버튼 눌렀을 때
+			{
+				UL = new UserList();
+				id = EId.getText();
+				char[] pass = EPassword.getPassword();
+				password = new String(pass);
+				
+				boolean logincheck = UL.LoginCheck(id,password); // 로그인 정보 맞는지 확인
 				if (logincheck == false)
 				{
 					EId.requestFocus();
@@ -84,24 +112,18 @@ public class LoginFrame extends JFrame
 					EPassword.requestFocus();
 					EPassword.selectAll();
 				}
-			}
-			else if (e.getSource()== BJoin)
-			{
-				id = EId.getText();
-				char[] pass = EPassword.getPassword();
-				password = new String(pass);
-				
-				boolean idcheck = UL.DuplicationCheck(id);
-				if (idcheck == false)
+				else // 맞으면 임시유저에 저장한거 불러와서 유저객체 생성
 				{
-					EId.requestFocus();
-					EId.selectAll();
-					EPassword.requestFocus();
-					EPassword.selectAll();
-				}
-				else
-				{
-					User user = new User(id,password,0);
+					String[] tmpuser = UL.GetTmpUser();
+					user = new User(tmpuser[0],tmpuser[1],Integer.parseInt(tmpuser[2]));
+					
+					setVisible(false);
+					LevelFrame Flevel= new LevelFrame();
+					Flevel.user = user;
+					Flevel.setUserList(UL);
+					Flevel.setLabelText();
+					Flevel.setVisible(true);
+					dispose();
 				}
 			}
 		}
@@ -109,9 +131,8 @@ public class LoginFrame extends JFrame
 	
 	public static void main (String[] args)
 	{
-		
-		LoginFrame frame = new LoginFrame();
-		frame.setVisible(true);
+		LoginFrame Flogin = new LoginFrame();
+		Flogin.setVisible(true);
 	}
 
 }
