@@ -1,7 +1,5 @@
 package project;
 
-import java.lang.Integer;
-
 // 로그인한 개인 회원 관리
 public class User //유저의 계정
 {
@@ -37,12 +35,7 @@ public class User //유저의 계정
 		return password;
 	}
 	
-	public String ToString()
-	{
-		return "User id : " + id + ", point : " + point;
-	}
-	
-	public String[] ToArray()
+	public String[] ToArray() //유저리스트에 들어가는 배열 형식으로 반환
 	{
 		String[] toarray = {id,password,String.valueOf(point)};
 		return toarray;
