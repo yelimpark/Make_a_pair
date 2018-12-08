@@ -3,11 +3,12 @@ import java.awt.*;
 
 public class CardFrame extends JFrame
 {
-	private Button[][] button;
+	Reset Game;
 	
 	public CardFrame()
 	{
-		button = new Button[5][6];
+		Game=new Reset();
+		Button[] button = new Button[30];
 		setLayout(null);
 		JLabel time = new JLabel("시간"); // 시간 나타내기 
 		time.setBounds(50,20,80,30);
@@ -22,13 +23,10 @@ public class CardFrame extends JFrame
 		JPanel card = new JPanel(); // 카드 배열 패널에 추가 
 		card.setBounds(50,80,800,620);
 		card.setLayout(new GridLayout(5,6));
-		for (int i=0; i<5; i++)
+		for (int i=0; i<30; i++)
 		{
-			for(int j = 0; j<6; j++)
-			{
-				button[i][j] = new Button(this, image1, "./cards/back");
-				card.add(button[i][j]);
-			}
+			button[i] = new Button(Game.GetImage(i), Game.GetImage(30));
+			card.add(button[i]);
 		}
 		add(card);
 		JButton item_1 = new JButton("item"); // 아이템1
