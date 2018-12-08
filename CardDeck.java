@@ -4,7 +4,7 @@ public class CardDeck
 {
 	private Card[] deck = new Card[4*Card.suit_size];
 	
-	private void createDeck(String suit) 
+	private void createDeck(String suit) // 카드 1~13까지 생성 
 	{
 		for(int i=0; i<Card.suit_size; i++)
 		{
@@ -12,7 +12,7 @@ public class CardDeck
 		}
 	}
 	
-	public CardDeck() // carddeck 만들기
+	public CardDeck() // 카드 덱 생성 
 	{
 		createDeck("spade");
 		createDeck("heart");
@@ -20,10 +20,10 @@ public class CardDeck
 		createDeck("club");
 	}
 	
-	public Card newCard() // card 랜덤으로 뽑기
+	public Card newCard() // 새로운 카드 뽑기 
 	{
 		ArrayList<Integer> index = new ArrayList<Integer>();
-		for(int i=0; i<104; i++)
+		for(int i=0; i<52; i++)
 		{
 			index.add(i);
 		}
@@ -31,7 +31,7 @@ public class CardDeck
 		Card card = null;
 		card = deck[index.get(0)];
 		index.remove(0);
-		for(int i=1; i<104; i++)
+		for(int i=1; i<52; i++)
 		{
 			deck[i-1] = deck [i];
 		}
