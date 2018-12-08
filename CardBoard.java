@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.ArrayList; // 고민중 - 다시 짜려고
 import java.util.Collections;
 public class CardBoard 
 {
