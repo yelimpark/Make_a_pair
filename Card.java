@@ -1,4 +1,3 @@
-
 public class Card {
 
 	public static final int suit_size = 13;
