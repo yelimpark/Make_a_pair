@@ -1,37 +1,36 @@
+package game;
 import java.util.ArrayList;
 import java.util.Collections;
+import game.Card;
+import game.CardDeck;
 
 import javax.swing.ImageIcon;
 public class Reset
 {
-	ImageIcon[] image;
+	ImageIcon[] image; // 카드 이미지 배열 
 	String suit;
 	int value;
-	Card[] deck;
+	String[] deck; //카드 이미지 이름 배열 
 	int imagenum;
 	
 	public Reset() 
 	{
 		image = new ImageIcon[31];
-		deck = new Card[15];
+		deck = new String[30];
 		getimage();
 	}
 	
-	public ImageIcon GetImage(int i) 
+	public ImageIcon GetImage(int i) //이미지 불러오기 
 	{
 		return image[i];
 	}
 	
-	public String cardname(int i)
+	public String cardname(int i) //이미지 이름 불러오기 
 	{
-		Card card = deck[i];
-		String Suit = card.getSuit();
-		int Value = card.getValue();
-		String name = Suit + Integer.toString(Value);
-		return name;
+		return deck[i];
 	}
 
-	public void getimage()
+	public void getimage()  //이미지 배열 만들기 
 	{
 		ArrayList<Integer> index = new ArrayList<Integer>();
     	for(int j=0; j<30; j++)
@@ -42,11 +41,12 @@ public class Reset
 		CardDeck cd = new CardDeck();
 		for(int i=0; i<15; i++)
 		{
-			Card card = new Card(" ",0);
-            card = cd.newCard();
+            Card card = cd.newCard();
 			suit = card.getSuit();
 			value = card.getValue();
-			deck[i] = card;
+			String name = suit + Integer.toString(value);
+			deck[index.get(i)] = name;
+			deck[index.get(i+15)] = name;
 			if(suit == "club")
 			{
 				switch (value)
