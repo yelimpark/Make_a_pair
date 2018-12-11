@@ -29,7 +29,7 @@ public class CardFrame extends JFrame
 		cardf.setLayout(new GridLayout(5,6));
 		for (int i=0; i<30; i++)
 		{
-			button[i] = new Button(Game.GetImage(i), Game.GetImage(30));
+			button[i] = new Button(Game.cardname(i), Game.GetImage(i), Game.GetImage(30));
 			cardb.add(button[i]);
 			
 		}
