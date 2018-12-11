@@ -5,6 +5,9 @@ public class CardFrame extends JFrame
 {
 	Reset Game;
 	int i;
+	int level = 0,price = level*2; //(ex / 쉬움 = 1, price =2)
+	public User user = new User();
+	private JLabel id,point; // 외부에서 지정
 	
 	public CardFrame()
 	{
@@ -16,9 +19,12 @@ public class CardFrame extends JFrame
 		time.setBounds(50,20,80,30);
 		add(time);
 
-		JLabel id = new JLabel("id"); // 사용자 아아디 나타내기 
-		id.setBounds(820,20,80,30);
+		id = new JLabel("id"); // 사용자 아아디 나타내기 
+		id.setBounds(770,20,80,30);
 		add(id);
+		point = new JLabel("point"); //!! 포인트 추가 (아이템 살걸 생각하면 몇포인트 있는지 알려주는게 좋을거같음)
+		add(point);
+		point.setBounds(820,20,80,30);
 		
 		JPanel cardb = new JPanel(); // 카드 배열 패널에 추가 
 		cardb.setBounds(50,80,800,620);
@@ -52,8 +58,14 @@ public class CardFrame extends JFrame
 		setTitle("test");
 		setVisible(true);
 		
-		
 	}
+	
+	public void setLabelText() // 입력된 유저정보로 라벨 바꿔주기 (창객체를 생성하고 거기에 유저를 넣어주는 거라 필요)
+	{
+		id.setText("ID : " + user.Getid());
+		point.setText(String.valueOf("POINT : " + user.GetPoint()));
+	}
+	
 	public static void main(String[] args)
 	{
 		CardFrame p = new CardFrame();
