@@ -8,6 +8,7 @@ public class CardFrame extends JFrame
 	int level = 0,price = level*2; //(ex / 쉬움 = 1, price =2)
 	public User user = new User();
 	private JLabel id,point; // 외부에서 지정
+	boolean end = false;
 	
 	public CardFrame()
 	{
