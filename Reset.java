@@ -1,4 +1,5 @@
 package game;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
 import game.Card;
@@ -22,7 +23,11 @@ public class Reset
 	
 	public ImageIcon GetImage(int i) //이미지 불러오기 
 	{
-		return image[i];
+		ImageIcon beforeIcon = image[i];
+		Image beforeimage = beforeIcon.getImage();
+		Image afterimage = beforeimage.getScaledInstance(108, 124, Image.SCALE_SMOOTH );
+		ImageIcon afterIcon = new ImageIcon(afterimage);
+		return afterIcon;
 	}
 	
 	public String cardname(int i) //이미지 이름 불러오기 
