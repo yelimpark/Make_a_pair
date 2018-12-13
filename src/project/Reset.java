@@ -9,11 +9,10 @@ import project.CardDeck;
 import javax.swing.ImageIcon;
 public class Reset
 {
-	ImageIcon[] image; // 카드 이미지 배열 
-	String suit;
-	int value;
-	String[] deck; //카드 이미지 이름 배열 
-	int imagenum;
+	private ImageIcon[] image; // 카드 이미지 배열 
+	private String suit;
+	private int value;
+	private String[] deck; //카드 이미지 이름 배열 
 	
 	public Reset() 
 	{

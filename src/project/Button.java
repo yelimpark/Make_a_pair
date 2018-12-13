@@ -9,10 +9,10 @@ public class Button extends JButton
 	private boolean backCheck;  // true = 뒷면  false = 앞면  
 	private String name;  //카드 이름 
 	
-	public Button(String n, ImageIcon InFront,ImageIcon Inback)
+	public Button(String n, ImageIcon argFront,ImageIcon argback)
 	{
-		front = InFront;
-		back = Inback;
+		front = argFront;
+		back = argback;
 		backCheck = true;
 		name = n;
 		setIcon(back);
@@ -38,7 +38,7 @@ public class Button extends JButton
 	
 	public boolean cardcheck(Button other) // 카드가 같은지 체크 
 	{
-		if(this.name == other.name)
+		if(this.name.equals(other.getName()))
 		{
 			return true;
 		}

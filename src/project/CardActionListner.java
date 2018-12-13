@@ -26,9 +26,8 @@ public class CardActionListner implements ActionListener
 		view = v;
 	}
 	
-	public void BringData(CardFrame v, User u, UserList ul,int p) //필요한 정보 가져오기
+	public void BringData(User u, UserList ul,int p) //필요한 정보 가져오기
 	{
-		view = v;
 		user = u;
 		UL = ul;
 		price = p;
@@ -48,25 +47,30 @@ public class CardActionListner implements ActionListener
 		
 		if (!btn[num].getBackcheck()) // 누른 버튼이 앞면일때
 		{
-			btn = new Button[2];
+			btn[num] = null;
 		}
 		else
 		{
 			btn[num].turnImage();
-			
 			if (num == 1)
 			{
 				sameCard = btn[num].cardcheck(btn[0]);
+			    if (sameCard)
+			    {
+			    	score++;
+			    }
+				else
+				{
+					btn[0].turnImage();
+					btn[1].turnImage();
+				}
 				num = 0;
-				btn = new Button[2];
+				btn[0] = null;
+				btn[1] = null;
 			}
-			
-			if (sameCard)
-				score++;
 			else
 			{
-				btn[0].turnImage();
-				btn[1].turnImage();
+				num++; // num 증가
 			}
 			
 			if (scorecheck())
@@ -80,9 +84,6 @@ public class CardActionListner implements ActionListener
 				Flevel.setVisible(true);
 				view.dispose();
 			}
-			
-			num++; // num 증가
 		}
 	}
-	
 }
