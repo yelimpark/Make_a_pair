@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import project.UserList;
 import project.User;
 
 /*
@@ -61,9 +60,8 @@ public class LoginFrame extends JFrame
 		
 		//사건 리스너 객체를 만들고 각각 버튼을 등록
         LoginListener listener = new LoginListener();
-        LoginListener listener2 = new LoginListener();
         BLogin.addActionListener(listener);
-        BJoin.addActionListener(listener2);
+        BJoin.addActionListener(listener);
 		
 	}
 	
@@ -98,10 +96,11 @@ public class LoginFrame extends JFrame
 				else // 중복아닐때 유저객체 생성 (나중에 게임 끝나고 유저리스트에 추가,정렬함)
 				{
 					user = new User(id,password,0);
+					
+					// 레벨창 띄우기
 					setVisible(false);
 					LevelFrame Flevel= new LevelFrame();
-					Flevel.user = user;
-					Flevel.setLabelText();
+					Flevel.BringData(user,UL);
 					Flevel.setVisible(true);
 					dispose();
 				}
@@ -135,11 +134,10 @@ public class LoginFrame extends JFrame
 					String[] tmpuser = UL.GetTmpUser();
 					user = new User(tmpuser[0],tmpuser[1],Integer.parseInt(tmpuser[2]));
 					
+					//레벨창 띄우기
 					setVisible(false);
 					LevelFrame Flevel= new LevelFrame();
-					Flevel.user = user;
-					Flevel.setUserList(UL);
-					Flevel.setLabelText();
+					Flevel.BringData(user,UL);
 					Flevel.setVisible(true);
 					dispose();
 				}

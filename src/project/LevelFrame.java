@@ -3,14 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import project.User;
-import project.UserList;
+import project.CardFrame;
 
 public class LevelFrame extends JFrame
 {
 	private JLabel Lid, Lpoint, Ibox;
 	private JButton Beasy, Bmiddle, Bhard, Bout, Branking;
 	private ImageIcon Ititle;
-	public User user = new User();
+	private User user = new User();
 	private UserList UL = new UserList();
 
 	public LevelFrame()
@@ -73,22 +73,25 @@ public class LevelFrame extends JFrame
 			{
 				setVisible(false);
 				CardFrame Fcard = new CardFrame();
-				Fcard.level = 1;
+				Fcard.BringData(user,UL,1);
 				Fcard.setVisible(true);
+				dispose();
 			}
 			else if (e.getSource()== Bmiddle)
 			{
 				setVisible(false);
 				CardFrame Fcard = new CardFrame();
-				Fcard.level = 2;
+				Fcard.BringData(user,UL,2);
 				Fcard.setVisible(true);
+				dispose();
 			}
 			else if (e.getSource()== Bhard)
 			{
 				setVisible(false);
 				CardFrame Fcard = new CardFrame();
-				Fcard.level = 3;
+				Fcard.BringData(user,UL,3);
 				Fcard.setVisible(true);
+				dispose();
 			}
 			else if (e.getSource()== Branking) // 랭킹 누르면 유저리스트 업데이트하고 랭킹보여주기
 			{
@@ -103,17 +106,14 @@ public class LevelFrame extends JFrame
 		}
 	}
 	
-	public void setLabelText() //로그인 창에서 아이디 및 포인트 가져오기
+	public void BringData(User arguser,UserList argUL) //로그인창에서 필요한 정보 가져오기
 	{
+		user = arguser;
+		UL = argUL;
 		Lid.setText("ID : " + user.Getid());
 		Lpoint.setText(String.valueOf("POINT : " + user.GetPoint()));
 	}
 
-	public void setUserList(UserList argUL) // 로그인창에서 유저리스트 가져오기
-	{
-		UL = argUL;
-	}
-	
 	public static void main(String[] args)
 	{
 		/*LevelFrame frame = new LevelFrame();

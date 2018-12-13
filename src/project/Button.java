@@ -5,29 +5,47 @@ import javax.swing.ImageIcon;
 
 public class Button extends JButton
 {
-	ImageIcon image1, image2;
-	boolean check;
+	private ImageIcon front, back;
+	private boolean backCheck;  // true = 뒷면  false = 앞면  
+	private String name;  //카드 이름 
 	
-	public Button(ImageIcon image,ImageIcon back)
+	public Button(String n, ImageIcon InFront,ImageIcon Inback)
 	{
-		image1 = image;
-		image2 = back;
-		check = true;
-		setIcon(image1);
+		front = InFront;
+		back = Inback;
+		backCheck = true;
+		name = n;
+		setIcon(back);
 	}
 	
-	public void clickButton()
+	public String getName() {return name;}
+	
+	public boolean getBackcheck() {return backCheck;}
+	
+	public void turnImage() // 카드뒤집기
 	{
-		if(check)
+		if (backCheck)
 		{
-			setIcon(image1);
-			check=false;
+			setIcon(front);
+			backCheck=false;
+		}
+		else
+		{
+			setIcon(back);
+			backCheck=true;
 		}
 	}
 	
-	public void returnImage()
+	public boolean cardcheck(Button other) // 카드가 같은지 체크 
 	{
-		setIcon(image2);
-		check=true;
+		if(this.name == other.name)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
+
 }
