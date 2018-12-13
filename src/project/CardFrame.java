@@ -12,11 +12,11 @@ import java.awt.event.ActionListener;
 public class CardFrame extends JFrame implements Runnable
 {
 	//Reset Game;
-	private int level = 0,price = level*2; //(ex / ½¬¿ò = 1, price =2)
+	private int level = 0,price = level*2; //(ex / ì‰¬ì›€ = 1, price =2)
 	private User user = new User();
-	private JLabel id,point; // ¿ÜºÎ¿¡¼­ ÁöÁ¤
+	private JLabel id,point; // ì™¸ë¶€ì—ì„œ ì§€ì •
 	private UserList UL = new UserList();
-	private CardActionListner CA = new CardActionListner(this); //Ä«µå¸¸ Æ÷ÇÔ
+	private CardActionListner CA = new CardActionListner(this); //ì¹´ë“œë§Œ í¬í•¨
 	private JButton item_1,item_2,quit;
 	
 	public CardFrame()
@@ -25,11 +25,11 @@ public class CardFrame extends JFrame implements Runnable
 		Button[] button = new Button[30];
 		setLayout(null);
 		
-		JLabel time = new JLabel("½Ã°£"); // ½Ã°£ ³ªÅ¸³»±â 
+		JLabel time = new JLabel("ì‹œê°„"); // ì‹œê°„ ë‚˜íƒ€ë‚´ê¸° 
 		time.setBounds(50,20,80,30);
 		add(time);
 
-		id = new JLabel("id"); // »ç¿ëÀÚ ¾Æ¾Æµğ ³ªÅ¸³»±â 
+		id = new JLabel("id"); // ì‚¬ìš©ì ì•„ì•„ë”” ë‚˜íƒ€ë‚´ê¸° 
 		id.setBounds(770,20,80,30);
 		add(id);
 		point = new JLabel("point");
@@ -38,7 +38,7 @@ public class CardFrame extends JFrame implements Runnable
 		
 		JPanel cardf = new JPanel();
 		cardf.setBounds(50,80,800,620);
-		cardf.setLayout(new GridLayout(5,6));
+		cardf.setLayout(new GridLayout(5,6,30,0));
 		
 		Reset Game = new Reset();
 		for (int i=0; i<30; i++)
@@ -51,17 +51,17 @@ public class CardFrame extends JFrame implements Runnable
 		
 		CardFrameListner CFL = new CardFrameListner();
 		
-		item_1 = new JButton(); // ¾ÆÀÌÅÛ1
+		item_1 = new JButton(); // ì•„ì´í…œ1
 		item_1.setBounds(880,80,90,90);
 		add(item_1);
 		item_1.addActionListener(CFL);
 		
-		item_2 = new JButton("item"); // ¾ÆÀÌÅÛ1
+		item_2 = new JButton("item"); // ì•„ì´í…œ1
 		item_2.setBounds(880,200,90,90);
 		add(item_2);
 		item_2.addActionListener(CFL);
 		
-		quit = new JButton("item");  // ³ª°¡±â 
+		quit = new JButton("item");  // ë‚˜ê°€ê¸° 
 		quit.setBounds(880,650,90,50);
 		add(quit);
 		quit.addActionListener(CFL);
@@ -72,7 +72,7 @@ public class CardFrame extends JFrame implements Runnable
 		
 	}
 	
-	public void BringData(User arguser,UserList argUL,int arglevel) //·Î±×ÀÎÃ¢¿¡¼­ ÇÊ¿äÇÑ Á¤º¸ °¡Á®¿À±â
+	public void BringData(User arguser,UserList argUL,int arglevel) //ë¡œê·¸ì¸ì°½ì—ì„œ í•„ìš”í•œ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	{
 		level = arglevel;
 		user = arguser;
@@ -96,7 +96,7 @@ public class CardFrame extends JFrame implements Runnable
 			}
 			else if (e.getSource() == quit)
 			{
-				JOptionPane.showMessageDialog(null,"°ÔÀÓÀ» Á¾·áÇÏ°í ¸ŞÀÎÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+				JOptionPane.showMessageDialog(null,"ê²Œì„ì„ ì¢…ë£Œí•˜ê³  ë©”ì¸ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 				setVisible(false);
 				LevelFrame Flevel= new LevelFrame();
 				Flevel.BringData(user,UL);
