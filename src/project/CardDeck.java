@@ -1,56 +1,43 @@
-package project;
 import java.util.ArrayList;
 import java.util.Collections;
 public class CardDeck 
 {
-	private Card[] deck = new Card[4*Card.suit_size];
+	private Card[] deck = new Card[52];
 	private int count=0;
+	public int[] index = new int[52];
 	
-	private void createDeck(String suit) // Ä«µå 1~13±îÁö »ı¼º 
+	private void createDeck(String suit) // ì¹´ë“œ 1~13ê¹Œì§€ ìƒì„± 
 	{
 		
 		for(int i=0; i<13; i++)
 		{
-			deck[count] = new Card(suit, i);
+			deck[count] = new Card(suit, i+1);
 			count++;
 		}
 	}
 	
-	public CardDeck() // Ä«µå µ¦ »ı¼º 
+	public CardDeck() // ì¹´ë“œ ë± ìƒì„± 
 	{
 		createDeck("spade");
 		createDeck("heart");
 		createDeck("diamond");
 		createDeck("club");
-		count = 0;
-	}
-	
-	public Card newCard() // »õ·Î¿î Ä«µå »Ì±â 
-	{
-		ArrayList<Integer> index = new ArrayList<Integer>();
+		ArrayList<Integer> temp = new ArrayList<Integer>();
 		for(int i=0; i<52; i++)
 		{
-			index.add(i);
+			temp.add(i);
 		}
-		Collections.shuffle(index);
-		if(index.size() == 0)
+		Collections.shuffle(temp);
+		for(int j=0; j<52; j++)
 		{
-			createDeck("spade");
-			createDeck("heart");
-			createDeck("diamond");
-			createDeck("club");
-			for(int i=0; i<52; i++)
-			{
-				index.add(i);
-			}
-			Collections.shuffle(index);
+			index[j] = temp.get(j);
 		}
-		Card card = deck[index.get(0)];
-		index.remove(0);
-		for(int i=1; i<52; i++)
-		{
-			deck[i-1] = deck [i];
-		}
+	}
+	
+	public Card newCard() // ìƒˆë¡œìš´ ì¹´ë“œ ë½‘ê¸° 
+	{
+		count--;
+		Card card = deck[index[count]];
 		return card;
 	}
 }
