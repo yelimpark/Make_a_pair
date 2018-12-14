@@ -48,4 +48,37 @@ public class Button extends JButton
 		}
 	}
 
+	public void turnCards(Button B1,Button B2)
+	{
+		Thread Pause = new Thread( new Runnable(){
+            @Override
+            public void run() {
+				try {
+					Thread.sleep(1000);
+					B1.turnImage();
+					B2.turnImage();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+            }
+		});
+		Pause.start();
+	}
+	
+	public void firstLook(Button b)
+	{
+		Thread Pause = new Thread( new Runnable(){
+            @Override
+            public void run() {
+				try {
+					Thread.sleep(8000);
+					b.turnImage();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+            }
+		});
+		Pause.start();
+	}
+	
 }

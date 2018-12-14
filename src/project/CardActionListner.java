@@ -1,7 +1,7 @@
 package project;
 
 import java.awt.event.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import project.Button;
 import project.CardFrame;
@@ -52,6 +52,7 @@ public class CardActionListner implements ActionListener
 		else
 		{
 			btn[num].turnImage();
+		   
 			if (num == 1)
 			{
 				sameCard = btn[num].cardcheck(btn[0]);
@@ -61,8 +62,8 @@ public class CardActionListner implements ActionListener
 			    }
 				else
 				{
-					btn[0].turnImage();
-					btn[1].turnImage();
+					Button tmp = new Button(null,null,null);
+					tmp.turnCards(btn[0],btn[1]);
 				}
 				num = 0;
 				btn[0] = null;

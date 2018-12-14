@@ -1,14 +1,15 @@
+package project;
+
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.ImageIcon;
-
-public class Reset
+ public class Reset
 {
-	private ImageIcon[] image; // ì¹´ë“œ ì´ë¯¸ì§€ ë°°ì—´ 
+	private ImageIcon[] image; // Ä«µå ÀÌ¹ÌÁö ¹è¿­ 
 	private String suit;
 	private int value;
-	private String[] deck; //ì¹´ë“œ ì´ë¯¸ì§€ ì´ë¦„ ë°°ì—´ 
+	private String[] deck; //Ä«µå ÀÌ¹ÌÁö ÀÌ¸§ ¹è¿­ 
 	
 	public Reset() 
 	{
@@ -17,7 +18,7 @@ public class Reset
 		getimage();
 	}
 	
-	public ImageIcon GetImage(int i) //ì´ë¯¸ì§€ ë¶ˆëŸ¬ì˜¤ê¸° 
+	public ImageIcon GetImage(int i) //ÀÌ¹ÌÁö ºÒ·¯¿À±â 
 	{
 		ImageIcon beforeIcon = image[i];
 		Image beforeimage = beforeIcon.getImage();
@@ -26,12 +27,11 @@ public class Reset
 		return afterIcon;
 	}
 	
-	public String cardname(int i) //ì´ë¯¸ì§€ ì´ë¦„ ë¶ˆëŸ¬ì˜¤ê¸° 
+	public String cardname(int i) //ÀÌ¹ÌÁö ÀÌ¸§ ºÒ·¯¿À±â 
 	{
 		return deck[i];
 	}
-
-	public void getimage()  //ì´ë¯¸ì§€ ë°°ì—´ ë§Œë“¤ê¸° 
+ 	public void getimage()  //ÀÌ¹ÌÁö ¹è¿­ ¸¸µé±â 
 	{
 		ArrayList<Integer> index = new ArrayList<Integer>();
     	for(int j=0; j<30; j++)
@@ -282,5 +282,5 @@ public class Reset
 			}
 		}
 		image[30] = new ImageIcon("cards/back.png");
-	}	
+	}
 }

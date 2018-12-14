@@ -76,7 +76,7 @@ public class LoginFrame extends JFrame
 				char[] pass = EPassword.getPassword();
 				password = new String(pass);
 				
-				if(id == "" || password == "") //빈칸입력시 다시받기
+				if(id == null || id.trim().isEmpty() || password == null || password.trim().isEmpty()) //빈칸입력시 다시받기
 				{
 					JOptionPane.showMessageDialog(null,"빈칸을 모두 채워주세요.");
 					EId.requestFocus();
@@ -84,25 +84,27 @@ public class LoginFrame extends JFrame
 					EPassword.requestFocus();
 					EPassword.selectAll();
 				}
-				
-				boolean idcheck = UL.DuplicationCheck(id); //아이디 중복 확인
-				if (idcheck == false) // 중복시 다시받음
+				else
 				{
-					EId.requestFocus();
-					EId.selectAll();
-					EPassword.requestFocus();
-					EPassword.selectAll();
-				}
-				else // 중복아닐때 유저객체 생성 (나중에 게임 끝나고 유저리스트에 추가,정렬함)
-				{
-					user = new User(id,password,0);
-					
-					// 레벨창 띄우기
-					setVisible(false);
-					LevelFrame Flevel= new LevelFrame();
-					Flevel.BringData(user,UL);
-					Flevel.setVisible(true);
-					dispose();
+					boolean idcheck = UL.DuplicationCheck(id); //아이디 중복 확인
+					if (idcheck == false) // 중복시 다시받음
+					{
+						EId.requestFocus();
+						EId.selectAll();
+						EPassword.requestFocus();
+						EPassword.selectAll();
+					}
+					else // 중복아닐때 유저객체 생성 (나중에 게임 끝나고 유저리스트에 추가,정렬함)
+					{
+						user = new User(id,password,0);
+						
+						// 레벨창 띄우기
+						setVisible(false);
+						LevelFrame Flevel= new LevelFrame();
+						Flevel.BringData(user,UL);
+						Flevel.setVisible(true);
+						dispose();
+					}
 				}
 			}
             else if (e.getSource() == BLogin) // 로그인 버튼 눌렀을 때
