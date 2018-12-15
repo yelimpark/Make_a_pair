@@ -11,9 +11,6 @@ public class CardActionListner implements ActionListener
 {
 	// 외부에서 가져올것 
 	private CardFrame view;
-	private User user;
-	private UserList UL;
-	private int price;
 	
 	//내부에서만 ㅆ는것
 	private Button[] btn = new Button[2];  // 버튼 저장해둘 리스트
@@ -24,13 +21,6 @@ public class CardActionListner implements ActionListener
 	CardActionListner(CardFrame v)
 	{
 		view = v;
-	}
-	
-	public void BringData(User u, UserList ul,int p) //필요한 정보 가져오기
-	{
-		user = u;
-		UL = ul;
-		price = p;
 	}
 	
 	public boolean scorecheck()  //전부 맞췄는지 검사
@@ -76,14 +66,7 @@ public class CardActionListner implements ActionListener
 			
 			if (scorecheck())
 			{
-				JOptionPane.showMessageDialog(null,"축하합니다! 승리하셨습니다!\n"
-						+ "point +" + String.valueOf(price));
-				user.ChangePoint(price);
-				view.setVisible(false);
-				LevelFrame Flevel= new LevelFrame();
-				Flevel.BringData(user,UL);
-				Flevel.setVisible(true);
-				view.dispose();
+				view.Win(); 
 			}
 		}
 	}

@@ -18,7 +18,7 @@ public class CardFrame extends JFrame
 	private CardActionListner CA = new CardActionListner(this); //카드만 포함
 	private JButton item,quit;
 	private JLabel time = new JLabel("time");
-	private timer timer = new timer(10, this); //40은 나중에 고칠 수 있음 레벨에 따라 다르게 나타나기 등으로 
+	private timer timer; //40은 나중에 고칠 수 있음 레벨에 따라 다르게 나타나기 등으로 
 	private int levelTime = 0;
 	
 	public CardFrame()
@@ -26,6 +26,7 @@ public class CardFrame extends JFrame
 		Button[] button = new Button[30];
 		setLayout(null);
 		
+		timer = new timer(10,this);
 		time.setText("시간 : "+timer.gettime());  //시간 문구 바꾸
 		time.setBounds(50,20,80,30); 
 		add(time);
@@ -85,9 +86,8 @@ public class CardFrame extends JFrame
 		UL = argUL;
 		id.setText("ID : " + user.Getid());
 		point.setText(String.valueOf("POINT : " + user.GetPoint()));
-		CA.BringData(user,UL,price);
 		levelTime = 120 - level*10;
-		timer.timeadd(levelTime);
+		timer.timeadd(10);
 	}
 	
 	public void update()
@@ -97,7 +97,21 @@ public class CardFrame extends JFrame
 	
 	public void TimeOut() 
 	{
+		timer.Cancle();
 		JOptionPane.showMessageDialog(null,"타임 오버!");
+		setVisible(false);
+		LevelFrame Flevel= new LevelFrame();
+		Flevel.BringData(user,UL);
+		Flevel.setVisible(true);
+		dispose();
+	}
+	
+	public void Win()
+	{
+		timer.Cancle();
+		JOptionPane.showMessageDialog(null,"축하합니다! 승리하셨습니다!\n"
+				+ "point +" + String.valueOf(price));
+		user.ChangePoint(price);
 		setVisible(false);
 		LevelFrame Flevel= new LevelFrame();
 		Flevel.BringData(user,UL);
@@ -117,6 +131,7 @@ public class CardFrame extends JFrame
 			}
 			else if (e.getSource() == quit)
 			{
+				timer.Cancle();
 				JOptionPane.showMessageDialog(null,"게임을 종료하고 메인으로 돌아갑니다.");
 				setVisible(false);
 				LevelFrame Flevel= new LevelFrame();

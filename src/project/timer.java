@@ -7,10 +7,10 @@ public class timer
 {
 	private int time=0;
 	private CardFrame view;
+	private Timer g_timer = new Timer();
 	
 	public timer(int start, CardFrame v)
 	{
-		Timer g_timer = new Timer();
 		time = start;
 		view = v;
 		TimerTask task = new TimerTask() 
@@ -30,6 +30,11 @@ public class timer
 			}
 		};
 		g_timer.schedule(task, 100, 1000);
+	}
+	
+	public void Cancle()
+	{
+		g_timer.cancel();
 	}
 	
 	public int gettime()
