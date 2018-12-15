@@ -8,7 +8,6 @@ public class timer
 	private int time=0;
 	private CardFrame view;
 	
-	
 	public timer(int start, CardFrame v)
 	{
 		Timer g_timer = new Timer();
@@ -25,6 +24,7 @@ public class timer
 				}
 				else
 				{
+					view.TimeOut();
 					g_timer.cancel();
 				}
 			}

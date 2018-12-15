@@ -17,9 +17,9 @@ public class CardFrame extends JFrame
 	private UserList UL = new UserList();
 	private CardActionListner CA = new CardActionListner(this); //카드만 포함
 	private JButton item,quit;
-	private JLabel time = new JLabel();
-	private timer timer = new timer(40, this); //40은 나중에 고칠 수 있음 레벨에 따라 다르게 나타나기 등으로 
-	private int CurrentTime = 0;
+	private JLabel time = new JLabel("time");
+	private timer timer = new timer(10, this); //40은 나중에 고칠 수 있음 레벨에 따라 다르게 나타나기 등으로 
+	private int levelTime = 0;
 	
 	public CardFrame()
 	{
@@ -86,12 +86,23 @@ public class CardFrame extends JFrame
 		id.setText("ID : " + user.Getid());
 		point.setText(String.valueOf("POINT : " + user.GetPoint()));
 		CA.BringData(user,UL,price);
+		levelTime = 120 - level*10;
+		timer.timeadd(levelTime);
 	}
 	
 	public void update()
 	{
-		CurrentTime = timer.gettime();
-		time.setText("시간 : "+CurrentTime);
+		time.setText("시간 : "+timer.gettime());
+	}
+	
+	public void TimeOut() 
+	{
+		JOptionPane.showMessageDialog(null,"타임 오버!");
+		setVisible(false);
+		LevelFrame Flevel= new LevelFrame();
+		Flevel.BringData(user,UL);
+		Flevel.setVisible(true);
+		dispose();
 	}
 	
 	public class CardFrameListner implements ActionListener 
