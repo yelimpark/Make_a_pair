@@ -1,3 +1,5 @@
+package project;
+
 import java.util.ArrayList;
 import java.util.Collections;
 public class CardDeck 
@@ -6,7 +8,7 @@ public class CardDeck
 	private int count=0;
 	public int[] index = new int[52];
 	
-	private void createDeck(String suit) // ì¹´ë“œ 1~13ê¹Œì§€ ìƒì„± 
+	private void createDeck(String suit) // Ä«µå 1~13±îÁö »ı¼º 
 	{
 		
 		for(int i=0; i<13; i++)
@@ -16,7 +18,7 @@ public class CardDeck
 		}
 	}
 	
-	public CardDeck() // ì¹´ë“œ ë± ìƒì„± 
+	public CardDeck() // Ä«µå µ¦ »ı¼º 
 	{
 		createDeck("spade");
 		createDeck("heart");
@@ -34,7 +36,7 @@ public class CardDeck
 		}
 	}
 	
-	public Card newCard() // ìƒˆë¡œìš´ ì¹´ë“œ ë½‘ê¸° 
+	public Card newCard() // »õ·Î¿î Ä«µå »Ì±â 
 	{
 		count--;
 		Card card = deck[index[count]];
