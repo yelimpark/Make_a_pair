@@ -1,5 +1,5 @@
 # MAKE A PAIR GAME
-## for program_map_out
+## for program map out class
 
 ----
 
